@@ -18,6 +18,36 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       -
+        name: Start PMG proxy
+        uses: safedep/pmg@v1
+        with:
+          server-mode: true
+          api-key: ${{ secrets.SAFEDEP_API_KEY }}
+          tenant-id: ${{ secrets.SAFEDEP_TENANT_ID }}
+      -
+        name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      -
+        name: Install dependencies
+        run: |
+          yarn install --frozen-lockfile
+      -
+        name: Enforce PMG policy
+        if: always()
+        run: |
+          set +e
+          pmg proxy stop --fail-on-violation
+          code=$?
+          # The action exported HTTP(S)_PROXY job-wide via GITHUB_ENV. The proxy
+          # is now dead, so clear them or every later step routes through a
+          # closed port. CA vars are additive and left alone.
+          for v in HTTP_PROXY HTTPS_PROXY NO_PROXY http_proxy https_proxy no_proxy; do
+            echo "$v=" >> "$GITHUB_ENV"
+          done
+          exit $code
+      -
         name: Validate
         uses: docker/bake-action@v2
         with:
