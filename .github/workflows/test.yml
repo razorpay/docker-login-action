@@ -1,5 +1,7 @@
 name: test
 
+# PMG (SafeDep Package Manager Guard) is wired into every job in this file.
+# See .github/PMG-INTEGRATION.md for the per-job rationale.
 on:
   push:
     branches:
@@ -18,6 +20,13 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       -
+        name: Setup PMG proxy
+        uses: safedep/pmg@v1
+        with:
+          server-mode: true
+          api-key: ${{ secrets.PMG_PUBLIC_REPOS_TOKEN }}
+          tenant-id: ${{ secrets.PMG_TENANT_ID }}
+      -
         name: Validate
         uses: docker/bake-action@v2
         with:
@@ -32,3 +41,7 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           file: ./coverage/clover.xml
+      -
+        name: Enforce PMG policy
+        if: always()
+        run: pmg proxy stop --fail-on-violation
