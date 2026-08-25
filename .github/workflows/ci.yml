@@ -149,6 +149,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup PMG proxy
         id: pmg-setup
+        if: runner.os == 'Linux'
         uses: safedep/pmg@v1
         with:
           server-mode: true
@@ -161,7 +162,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Enforce PMG policy
-        if: always()
+        if: always() && runner.os == 'Linux'
         run: |
           if [ "${{ steps.pmg-setup.outcome }}" = "success" ]; then
             pmg proxy stop --fail-on-violation
@@ -183,6 +184,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup PMG proxy
         id: pmg-setup
+        if: runner.os == 'Linux'
         uses: safedep/pmg@v1
         with:
           server-mode: true
@@ -196,7 +198,7 @@ jobs:
           username: ${{ secrets.AWS_ACCESS_KEY_ID }}
           password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Enforce PMG policy
-        if: always()
+        if: always() && runner.os == 'Linux'
         run: |
           if [ "${{ steps.pmg-setup.outcome }}" = "success" ]; then
             pmg proxy stop --fail-on-violation
@@ -218,6 +220,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup PMG proxy
         id: pmg-setup
+        if: runner.os == 'Linux'
         uses: safedep/pmg@v1
         with:
           server-mode: true
@@ -236,7 +239,7 @@ jobs:
         with:
           registry: ${{ secrets.AWS_ACCOUNT_NUMBER }}.dkr.ecr.us-east-1.amazonaws.com
       - name: Enforce PMG policy
-        if: always()
+        if: always() && runner.os == 'Linux'
         run: |
           if [ "${{ steps.pmg-setup.outcome }}" = "success" ]; then
             pmg proxy stop --fail-on-violation
@@ -258,6 +261,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup PMG proxy
         id: pmg-setup
+        if: runner.os == 'Linux'
         uses: safedep/pmg@v1
         with:
           server-mode: true
@@ -273,7 +277,7 @@ jobs:
         env:
           AWS_REGION: us-east-1
       - name: Enforce PMG policy
-        if: always()
+        if: always() && runner.os == 'Linux'
         run: |
           if [ "${{ steps.pmg-setup.outcome }}" = "success" ]; then
             pmg proxy stop --fail-on-violation
@@ -295,6 +299,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup PMG proxy
         id: pmg-setup
+        if: runner.os == 'Linux'
         uses: safedep/pmg@v1
         with:
           server-mode: true
@@ -313,7 +318,7 @@ jobs:
         with:
           registry: public.ecr.aws
       - name: Enforce PMG policy
-        if: always()
+        if: always() && runner.os == 'Linux'
         run: |
           if [ "${{ steps.pmg-setup.outcome }}" = "success" ]; then
             pmg proxy stop --fail-on-violation
@@ -335,6 +340,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup PMG proxy
         id: pmg-setup
+        if: runner.os == 'Linux'
         uses: safedep/pmg@v1
         with:
           server-mode: true
@@ -348,7 +354,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Enforce PMG policy
-        if: always()
+        if: always() && runner.os == 'Linux'
         run: |
           if [ "${{ steps.pmg-setup.outcome }}" = "success" ]; then
             pmg proxy stop --fail-on-violation
@@ -370,6 +376,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup PMG proxy
         id: pmg-setup
+        if: runner.os == 'Linux'
         uses: safedep/pmg@v1
         with:
           server-mode: true
@@ -383,7 +390,7 @@ jobs:
           username: ${{ secrets.GITLAB_USERNAME }}
           password: ${{ secrets.GITLAB_TOKEN }}
       - name: Enforce PMG policy
-        if: always()
+        if: always() && runner.os == 'Linux'
         run: |
           if [ "${{ steps.pmg-setup.outcome }}" = "success" ]; then
             pmg proxy stop --fail-on-violation
@@ -405,6 +412,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup PMG proxy
         id: pmg-setup
+        if: runner.os == 'Linux'
         uses: safedep/pmg@v1
         with:
           server-mode: true
@@ -418,7 +426,7 @@ jobs:
           username: _json_key
           password: ${{ secrets.GAR_JSON_KEY }}
       - name: Enforce PMG policy
-        if: always()
+        if: always() && runner.os == 'Linux'
         run: |
           if [ "${{ steps.pmg-setup.outcome }}" = "success" ]; then
             pmg proxy stop --fail-on-violation
@@ -440,6 +448,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup PMG proxy
         id: pmg-setup
+        if: runner.os == 'Linux'
         uses: safedep/pmg@v1
         with:
           server-mode: true
@@ -453,7 +462,7 @@ jobs:
           username: _json_key
           password: ${{ secrets.GCR_JSON_KEY }}
       - name: Enforce PMG policy
-        if: always()
+        if: always() && runner.os == 'Linux'
         run: |
           if [ "${{ steps.pmg-setup.outcome }}" = "success" ]; then
             pmg proxy stop --fail-on-violation
