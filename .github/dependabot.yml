@@ -4,6 +4,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    cooldown:
+      default-days: 7
     labels:
       - "dependencies"
       - "bot"
@@ -11,6 +13,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    cooldown:
+      default-days: 7
     allow:
       - dependency-type: "production"
     labels:
