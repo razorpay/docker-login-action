@@ -11,7 +11,7 @@ on:
 
 jobs:
   stop-docker:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux-amd64]
     steps:
       -
         name: Checkout
@@ -29,7 +29,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
   logout:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux-amd64]
     strategy:
       fail-fast: false
       matrix:
@@ -77,7 +77,7 @@ jobs:
           docker pull ghcr.io/docker-ghactiontest/test
 
   acr:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux-amd64]
     steps:
       -
         name: Checkout
