@@ -55,6 +55,9 @@
     "picomatch": "2.3.2",
     "brace-expansion": "1.1.21",
     "@babel/helpers": "7.26.10",
-    "@babel/core": "7.29.6"
+    "@babel/core": "7.29.6",
+    "minimatch": "11.0.1",
+    "fast-xml-parser": "5.7.0",
+    "@tootallnate/once": "2.0.1"
   }
 }
